@@ -17,7 +17,7 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     # add cli arguments
     parser.add_argument("-i","--input_file",help="Input file containing the hostsnames (default: \"hosts.txt\")",type=str,default="hosts.txt",nargs="?")
-    parser.add_argument("-o","--output_file",help="Name of the output file the hostnames will be exported to (default: \"host_table\")",type=str,default="host_table.xlsx",nargs="?")
+    parser.add_argument("-o","--output_file",help="Name of the output file the hostnames will be exported to (default: \"host_table\")",type=str,default="host_table",nargs="?")
     parser.add_argument("-c","--config_file",help="Configuration file contianing a Shodan API key (default: \"shodan_conf.cfg\")",type=str,default="shodan_conf.cfg",nargs="?")
     parser.add_argument("-v","--verbose",help="Whether to output into the console information about the script's progress or not",type=bool,default=False,nargs="?")
     parser.add_argument("-f","--output_format",help="It can be either \"excel\" or \"csv\" (default: \"excel\")",type=str,default="excel",nargs="?")

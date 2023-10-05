@@ -1,0 +1,7 @@
+venv
+shodan_conf_test.cfg
+hostlist.txt
+auxiliary_modules/__pycache__
+*.txt
+*.xlsx
+*.csv

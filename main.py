@@ -62,10 +62,9 @@ if __name__ == '__main__':
 
     # make a table containing all the parsed data
     shodan_compilation = clean_merge(general_table,vulnerability_data_table,["vulns"])
-    
+    vulnerabilities = generate_table_vulns_per_host(shodan_compilation=shodan_compilation)
+    save_table(parsed_table=vulnerabilities,save_path="vulnerabilities",output_format=output_format,verbose=verbose)
     save_table(parsed_table=shodan_compilation,save_path=output_file,output_format=output_format,verbose=verbose)
-
-
 
 
 

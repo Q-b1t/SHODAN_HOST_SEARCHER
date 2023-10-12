@@ -154,3 +154,19 @@ def save_table(parsed_table,save_path,output_format,verbose):
          
     if verbose:
         print(colored(f"[+] Exporting the results to {filename}.","green"))
+
+
+
+def generate_table_vulns_per_host(shodan_compilation):
+  vulnerabilities = shodan_compilation[["vulns","cvss","summary"]].dropna(subset="vulns").drop_duplicates(subset="vulns").reset_index().drop("index",axis = 1)
+  vulns_per_hosts = shodan_compilation[["ip_str","vulns"]].dropna().drop_duplicates()
+  total_vulns = vulns_per_hosts["vulns"].to_list()
+  affected_hosts_per_vuln = dict()
+  for vuln in total_vulns:
+    df = vulns_per_hosts[vulns_per_hosts["vulns"] == vuln]
+    affected_hosts = df["ip_str"].to_list()
+    affected_hosts_per_vuln[vuln] = affected_hosts
+  for key,value in affected_hosts_per_vuln.items():
+    affected_hosts_per_vuln[key] = ",".join(value) if len(value) > 1 else value[0]
+  vulnerabilities["affected_hosts"] = vulnerabilities["vulns"].apply(lambda x : affected_hosts_per_vuln[x])
+  return vulnerabilities
